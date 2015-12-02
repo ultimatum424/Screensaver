@@ -8,12 +8,15 @@ using namespace sf;
 struct RectangleStruct
 {
 	RectangleShape square;
-	RectangleShape square2;
-	RectangleShape square3;
-	RectangleShape square4;
-	RectangleShape square5;
 };
 struct SecreteStruct
+{
+	int color;
+	int size;
+	int move;
+	int rotation;
+};
+struct StageStruct
 {
 	int color;
 	int size;
@@ -29,6 +32,13 @@ void Draw(RenderWindow& window, RectangleStruct Rect[QUANTITY])
 	}
 	window.display();
 	window.clear(sf::Color::White);
+}
+void InitializationStage(StageStruct& Stage)
+{
+	Stage.color = 1;
+	Stage.size = 1;
+	Stage.move = 1;
+	Stage.rotation = 1;
 }
 void InitializationSecret(SecreteStruct& Secret)
 {
@@ -62,16 +72,16 @@ void ChangeSize(RectangleStruct(&Rect)[QUANTITY], float j, float time)
 		Rect[i].square.setScale(j, j);
 	}
 }
-void StageSelect(int& color_stage, int i, int& size_stage, float j, int& move_stage, RectangleStruct Rect[QUANTITY])
+void StageSelect(StageStruct& Stage, int i, float j, RectangleStruct Rect[QUANTITY])
 {
-	if (i == 256) color_stage = -1;
-	if (i == 0) color_stage = 1;
-	if (j >= 2) { size_stage = -1; }
-	if (j <= 1) { size_stage =  1; }
-	if ((Rect[2].square.getPosition().x <= 150) && (Rect[2].square.getPosition().y <= 100)) move_stage = 1;
-	if ((Rect[2].square.getPosition().x >= WINDOW_X - 200) && (Rect[2].square.getPosition().y <= 100)) move_stage = 2;
-	if ((Rect[2].square.getPosition().x >= WINDOW_X - 200) && (Rect[2].square.getPosition().y >= WINDOW_X - 100)) move_stage = 3;
-	if ((Rect[2].square.getPosition().x <= 150) && (Rect[2].square.getPosition().y >= WINDOW_X - 100)) move_stage = 4;
+	if (i == 256) Stage.color = -1;
+	if (i == 0) Stage.color = 1;
+	if (j >= 2) { Stage.size = -1; }
+	if (j <= 1) { Stage.size =  1; }
+	if ((Rect[2].square.getPosition().x <= 150) && (Rect[2].square.getPosition().y <= 100)) Stage.move = 1;
+	if ((Rect[2].square.getPosition().x >= WINDOW_X - 200) && (Rect[2].square.getPosition().y <= 100)) Stage.move = 2;
+	if ((Rect[2].square.getPosition().x >= WINDOW_X - 200) && (Rect[2].square.getPosition().y >= WINDOW_X - 100)) Stage.move = 3;
+	if ((Rect[2].square.getPosition().x <= 150) && (Rect[2].square.getPosition().y >= WINDOW_X - 100)) Stage.move = 4;
 
 }
 void Move(RectangleStruct(&Rect)[QUANTITY], Vector2f speed_move)
@@ -89,10 +99,22 @@ void Rotation(RectangleStruct(&Rect)[QUANTITY], float time)
 		
 	}
 }
+void SceneChange(StageStruct Stage, int& i_color, float& i_size, Vector2f& speed_move, float& time)
+{
+	if (Stage.color == 1) i_color++;
+	if (Stage.color == -1) i_color--;
+	if (Stage.size == 1) i_size = i_size + 0.1 * time / 100;
+	if (Stage.size == -1) i_size = i_size - 0.1 * time / 100;
+	if (Stage.move == 1) { speed_move.x = SPEED; speed_move.y = 0; }
+	if (Stage.move == 2) { speed_move.x = 0; speed_move.y = SPEED; }
+	if (Stage.move == 3) { speed_move.x = -SPEED; speed_move.y = 0; }
+	if (Stage.move == 4) { speed_move.x = 0; speed_move.y = -SPEED; }
+}
 int main()
 {
 	struct RectangleStruct Rect[QUANTITY] = {};
 	struct SecreteStruct Secret;
+	struct StageStruct Stage;
 	sf::ContextSettings settings;
 	settings.antialiasingLevel = 8;
 	sf::RenderWindow window(sf::VideoMode(WINDOW_X, WINDOW_Y), "ScreenSaver", sf::Style::Default, settings);
@@ -100,15 +122,19 @@ int main()
 	Clock clock;
 	Clock change_clock;
 	srand(time(NULL));
+
+	InitializationStage(Stage);
 	int secret = 1;
 	int i_color = 0;
 	int num_turns = 0;
-	int color_stage = 1; int size_stage = 1; int move_stage = 1; int stage_rotation = 1;
 	float i_size = 1;
+
 	Vector2f speed_move;
 	speed_move.x = SPEED;
 	speed_move.y = SPEED;
+
 	InitializationSecret(Secret);
+
 	change_clock.restart();
 	while (window.isOpen())
 	{
@@ -117,7 +143,7 @@ int main()
 		clock.restart();
 		time = time / 1000;
 		sf::Event event;
-		if (time_for_change >= 5)
+		if (time_for_change >= TIME)
 		{
 			change_clock.restart();
 			Secret.color = rand() % 2;
@@ -131,15 +157,8 @@ int main()
 			if (event.type == sf::Event::Closed)
 				window.close();
 		}
-		StageSelect(color_stage, i_color, size_stage, i_size, move_stage, Rect);
-		if (color_stage == 1) i_color++;
-		if (color_stage == -1) i_color--;
-		if (size_stage == 1) i_size = i_size + 0.1 * time / 100;
-		if (size_stage == -1) i_size = i_size - 0.1 * time / 100;
-		if (move_stage == 1) { speed_move.x = SPEED; speed_move.y = 0;}
-		if (move_stage == 2) { speed_move.x = 0; speed_move.y = SPEED; }
-		if (move_stage == 3) { speed_move.x = -SPEED; speed_move.y = 0; }
-		if (move_stage == 4) { speed_move.x = 0; speed_move.y = -SPEED; }
+		StageSelect(Stage, i_color, i_size, Rect);
+		SceneChange(Stage, i_color, i_size, speed_move, time);
 		
 		if (Secret.rotation == 1) Rotation(Rect, time);
 		if (Secret.color == 1) ChangeColor(Rect, i_color, time);

@@ -1,20 +1,20 @@
-﻿Сборка начата 02.12.2015 12:03:48.
+﻿Сборка начата 02.12.2015 12:21:01.
      1>Проект "D:\Универ\ИИП и игра\screensaver\screensaver\screensaver.vcxproj" в узле 2 (целевые объекты Build).
      1>ClCompile:
          C:\Program Files (x86)\Microsoft Visual Studio 14.0\VC\bin\x86_amd64\CL.exe /c /I"D:\Универ\ИИП и игра\SFML-2.3.2\include" /ZI /nologo /W3 /WX- /sdl /Od /D SFML_DYNAMIC /D _DEBUG /D _CONSOLE /D _UNICODE /D UNICODE /Gm /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Zc:inline /Fo"x64\Debug\\" /Fd"x64\Debug\vc140.pdb" /Gd /TP /errorReport:prompt main.cpp
          main.cpp
      1>d:\универ\иип и игра\screensaver\screensaver\const.h(5): warning C4305: инициализация: усечение из "double" к "float"
-     1>d:\универ\иип и игра\screensaver\screensaver\main.cpp(44): warning C4244: аргумент: преобразование "const int" в "float", возможна потеря данных
-     1>d:\универ\иип и игра\screensaver\screensaver\main.cpp(46): warning C4244: аргумент: преобразование "int" в "float", возможна потеря данных
-     1>d:\универ\иип и игра\screensaver\screensaver\main.cpp(52): warning C4244: аргумент: преобразование "float" в "sf::Uint8", возможна потеря данных
-     1>d:\универ\иип и игра\screensaver\screensaver\main.cpp(53): warning C4244: аргумент: преобразование "float" в "sf::Uint8", возможна потеря данных
-     1>d:\универ\иип и игра\screensaver\screensaver\main.cpp(54): warning C4244: аргумент: преобразование "float" в "sf::Uint8", возможна потеря данных
-     1>d:\универ\иип и игра\screensaver\screensaver\main.cpp(55): warning C4244: аргумент: преобразование "float" в "sf::Uint8", возможна потеря данных
-     1>d:\универ\иип и игра\screensaver\screensaver\main.cpp(56): warning C4244: аргумент: преобразование "float" в "sf::Uint8", возможна потеря данных
-     1>d:\универ\иип и игра\screensaver\screensaver\main.cpp(102): warning C4244: аргумент: преобразование "time_t" в "unsigned int", возможна потеря данных
-     1>d:\универ\иип и игра\screensaver\screensaver\main.cpp(115): warning C4244: инициализация: преобразование "sf::Int64" в "float", возможна потеря данных
-     1>d:\универ\иип и игра\screensaver\screensaver\main.cpp(137): warning C4244: =: преобразование "double" в "float", возможна потеря данных
-     1>d:\универ\иип и игра\screensaver\screensaver\main.cpp(138): warning C4244: =: преобразование "double" в "float", возможна потеря данных
+     1>d:\универ\иип и игра\screensaver\screensaver\main.cpp(54): warning C4244: аргумент: преобразование "const int" в "float", возможна потеря данных
+     1>d:\универ\иип и игра\screensaver\screensaver\main.cpp(56): warning C4244: аргумент: преобразование "int" в "float", возможна потеря данных
+     1>d:\универ\иип и игра\screensaver\screensaver\main.cpp(62): warning C4244: аргумент: преобразование "float" в "sf::Uint8", возможна потеря данных
+     1>d:\универ\иип и игра\screensaver\screensaver\main.cpp(63): warning C4244: аргумент: преобразование "float" в "sf::Uint8", возможна потеря данных
+     1>d:\универ\иип и игра\screensaver\screensaver\main.cpp(64): warning C4244: аргумент: преобразование "float" в "sf::Uint8", возможна потеря данных
+     1>d:\универ\иип и игра\screensaver\screensaver\main.cpp(65): warning C4244: аргумент: преобразование "float" в "sf::Uint8", возможна потеря данных
+     1>d:\универ\иип и игра\screensaver\screensaver\main.cpp(66): warning C4244: аргумент: преобразование "float" в "sf::Uint8", возможна потеря данных
+     1>d:\универ\иип и игра\screensaver\screensaver\main.cpp(106): warning C4244: =: преобразование "double" в "float", возможна потеря данных
+     1>d:\универ\иип и игра\screensaver\screensaver\main.cpp(107): warning C4244: =: преобразование "double" в "float", возможна потеря данных
+     1>d:\универ\иип и игра\screensaver\screensaver\main.cpp(124): warning C4244: аргумент: преобразование "time_t" в "unsigned int", возможна потеря данных
+     1>d:\универ\иип и игра\screensaver\screensaver\main.cpp(141): warning C4244: инициализация: преобразование "sf::Int64" в "float", возможна потеря данных
        Link:
          C:\Program Files (x86)\Microsoft Visual Studio 14.0\VC\bin\x86_amd64\link.exe /ERRORREPORT:PROMPT /OUT:"D:\Универ\ИИП и игра\screensaver\x64\Debug\screensaver.exe" /INCREMENTAL /NOLOGO /LIBPATH:"D:\Универ\ИИП и игра\SFML-2.3.2\lib" "sfml-graphics-d.lib" "sfml-window-d.lib" "sfml-system-d.lib" "sfml-audio-d.lib" kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib /MANIFEST /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /manifest:embed /Debug /PDB:"D:\Универ\ИИП и игра\screensaver\x64\Debug\screensaver.pdb" /SUBSYSTEM:CONSOLE /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:"D:\Универ\ИИП и игра\screensaver\x64\Debug\screensaver.lib" /MACHINE:X64 x64\Debug\main.obj
          screensaver.vcxproj -> D:\Универ\ИИП и игра\screensaver\x64\Debug\screensaver.exe
@@ -22,4 +22,4 @@
 
 Сборка успешно завершена.
 
-Затраченное время: 00:00:00.88
+Затраченное время: 00:00:00.85

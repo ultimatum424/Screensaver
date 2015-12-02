@@ -112,6 +112,13 @@ void SceneChange(StageStruct stage, int& i_color, float& i_size, Vector2f& speed
 
 	
 }
+void SecretChange(SecreteStruct& secret)
+{
+	secret.color = rand() % 2;
+	secret.move = rand() % 2;
+	secret.rotation = rand() % 2;
+	secret.size = rand() % 2;
+}
 void RunProgram(RenderWindow& window)
 {
 	RectangleStruct rect[QUANTITY] = {};
@@ -145,10 +152,7 @@ void RunProgram(RenderWindow& window)
 		if (time_for_change >= TIME)
 		{
 			change_clock.restart();
-			secret.color = rand() % 2;
-			secret.move = rand() % 2;
-			secret.rotation = rand() % 2;
-			secret.size = rand() % 2;
+			SecretChange(secret);
 		}
 		while (window.pollEvent(event))
 		{
@@ -169,7 +173,6 @@ void RunProgram(RenderWindow& window)
 }
 int main()
 {
-	
 	sf::ContextSettings settings;
 	settings.antialiasingLevel = 8;
 	sf::RenderWindow window(sf::VideoMode(WINDOW_X, WINDOW_Y), "ScreenSaver", sf::Style::Default, settings);

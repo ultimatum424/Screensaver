@@ -5,15 +5,15 @@
 
 
 using namespace sf;
-typedef struct RectangleStruct
+struct RectangleStruct
 {
-	RectangleShape square1;
+	RectangleShape square;
 	RectangleShape square2;
 	RectangleShape square3;
 	RectangleShape square4;
 	RectangleShape square5;
 };
-typedef struct SecreteStruct
+struct SecreteStruct
 {
 	int color;
 	int size;
@@ -21,14 +21,12 @@ typedef struct SecreteStruct
 	int rotation;
 };
 
-void Draw(RenderWindow& window, RectangleStruct Rect)
+void Draw(RenderWindow& window, RectangleStruct Rect[QUANTITY])
 {
-	
-	window.draw(Rect.square1);
-	window.draw(Rect.square2);
-	window.draw(Rect.square3);
-	window.draw(Rect.square4);
-	window.draw(Rect.square5);
+	for (int i = 0; i < QUANTITY; i++)
+	{
+		window.draw(Rect[i].square);
+	}
 	window.display();
 	window.clear(sf::Color::White);
 }
@@ -39,80 +37,65 @@ void InitializationSecret(SecreteStruct& Secret)
 	Secret.rotation = 1;
 	Secret.size = 1;
 }
-void InitializationSqure(RectangleStruct& Rect)
+void InitializationSqure(RectangleStruct(& Rect)[QUANTITY])
 {
-	Rect.square1.setSize(sf::Vector2f(squre_sieze, squre_sieze));
-	Rect.square1.setFillColor(Color(255, 0 , 0));
-	Rect.square1.setPosition(50, 50);
-
-	Rect.square2.setSize(sf::Vector2f(squre_sieze, squre_sieze));
-	Rect.square2.setFillColor(Color(255, 0, 0));
-	Rect.square2.setPosition(100, 50);
-
-	Rect.square3.setSize(sf::Vector2f(squre_sieze, squre_sieze));
-	Rect.square3.setFillColor(Color(255, 0, 0));
-	Rect.square3.setPosition(150, 50);
-
-	Rect.square4.setSize(sf::Vector2f(squre_sieze, squre_sieze));
-	Rect.square4.setFillColor(Color(255, 0, 0));
-	Rect.square4.setPosition(200, 50);
-
-	Rect.square5.setSize(sf::Vector2f(squre_sieze, squre_sieze));
-	Rect.square5.setFillColor(Color(255, 0, 0));
-	Rect.square5.setPosition(250, 50);
+	for (int i = 0; i < QUANTITY; i++)
+	{
+		Rect[i].square.setSize(sf::Vector2f(SQURE_SIEZE, SQURE_SIEZE));
+		Rect[i].square.setFillColor(Color(255, 0, 0));
+		Rect[i].square.setPosition(50 * i, 50);
+	}	
 }
-void ChangeColor(RectangleStruct& Rect, int i, float time)
+void ChangeColor(RectangleStruct(&Rect)[QUANTITY], int i, float time)
 {
 	
-	Rect.square1.setFillColor(Color(255, i* 1 * time, 0));
-	Rect.square2.setFillColor(Color(0, i * 1 * time, i* 1 * time));
-	Rect.square3.setFillColor(Color(0, i* 1 * time, 0));
-	Rect.square4.setFillColor(Color(i* 1 * time, 0, 0));
-	Rect.square5.setFillColor(Color(255, 0, i * 1 * time));
+	Rect[0].square.setFillColor(Color(255, i* 1 * time, 0));
+	Rect[1].square.setFillColor(Color(0, i * 1 * time, i* 1 * time));
+	Rect[2].square.setFillColor(Color(0, i* 1 * time, 0));
+	Rect[3].square.setFillColor(Color(i* 1 * time, 0, 0));
+	Rect[4].square.setFillColor(Color(255, 0, i * 1 * time));
 }
-void ChangeSize(RectangleStruct& Rect, float j, float time)
+void ChangeSize(RectangleStruct(&Rect)[QUANTITY], float j, float time)
 {
-	Rect.square1.setScale(j, j);
-	Rect.square2.setScale(j, j);
-	Rect.square3.setScale(j, j);
-	Rect.square4.setScale(j, j);
-	Rect.square5.setScale(j, j);
+	for (int i = 0; i < QUANTITY; i++)
+	{
+		Rect[i].square.setScale(j, j);
+	}
 }
-void StageSelect(int& color_stage, int i, int& size_stage, float j, int& move_stage,  RectangleStruct Rect)
+void StageSelect(int& color_stage, int i, int& size_stage, float j, int& move_stage, RectangleStruct Rect[QUANTITY])
 {
 	if (i == 256) color_stage = -1;
 	if (i == 0) color_stage = 1;
 	if (j >= 2) { size_stage = -1; }
 	if (j <= 1) { size_stage =  1; }
-	if ((Rect.square3.getPosition().x <= 150) && (Rect.square3.getPosition().y <= 100)) move_stage = 1;
-	if ((Rect.square3.getPosition().x >= window_x - 200) && (Rect.square3.getPosition().y <= 100)) move_stage = 2;
-	if ((Rect.square3.getPosition().x >= window_x - 200) && (Rect.square3.getPosition().y >= window_x - 100)) move_stage = 3;
-	if ((Rect.square3.getPosition().x <= 150) && (Rect.square3.getPosition().y >= window_x - 100)) move_stage = 4;
+	if ((Rect[2].square.getPosition().x <= 150) && (Rect[2].square.getPosition().y <= 100)) move_stage = 1;
+	if ((Rect[2].square.getPosition().x >= WINDOW_X - 200) && (Rect[2].square.getPosition().y <= 100)) move_stage = 2;
+	if ((Rect[2].square.getPosition().x >= WINDOW_X - 200) && (Rect[2].square.getPosition().y >= WINDOW_X - 100)) move_stage = 3;
+	if ((Rect[2].square.getPosition().x <= 150) && (Rect[2].square.getPosition().y >= WINDOW_X - 100)) move_stage = 4;
 
 }
-void Move(RectangleStruct& Rect, Vector2f speed_move)
+void Move(RectangleStruct(&Rect)[QUANTITY], Vector2f speed_move)
 {
-	Rect.square1.move(speed_move.x, speed_move.y);
-	Rect.square2.move(speed_move.x, speed_move.y);
-	Rect.square3.move(speed_move.x, speed_move.y);
-	Rect.square4.move(speed_move.x, speed_move.y);
-	Rect.square5.move(speed_move.x, speed_move.y);
+	for (int i = 0; i < QUANTITY; i++)
+	{
+		Rect[i].square.move(speed_move.x, speed_move.y);
+	}
 }
-void Rotation(RectangleStruct& Rect, float time)
+void Rotation(RectangleStruct(&Rect)[QUANTITY], float time)
 {
-	Rect.square1.setRotation(Rect.square1.getRotation() + (1 * time));
-	Rect.square2.setRotation(Rect.square2.getRotation() - (1 * time));
-	Rect.square3.setRotation(Rect.square3.getRotation() + (1 * time));
-	Rect.square4.setRotation(Rect.square4.getRotation() - (1 * time));
-	Rect.square5.setRotation(Rect.square5.getRotation() + (1 * time));
+	for (int i = 0; i < QUANTITY; i++)
+	{
+		Rect[i].square.setRotation(Rect[i].square.getRotation() + (1 * time));
+		
+	}
 }
 int main()
 {
-	struct RectangleStruct Rect;
+	struct RectangleStruct Rect[QUANTITY] = {};
 	struct SecreteStruct Secret;
 	sf::ContextSettings settings;
 	settings.antialiasingLevel = 8;
-	sf::RenderWindow window(sf::VideoMode(window_x, window_y), "ScreenSaver", sf::Style::Default, settings);
+	sf::RenderWindow window(sf::VideoMode(WINDOW_X, WINDOW_Y), "ScreenSaver", sf::Style::Default, settings);
 	InitializationSqure(Rect);
 	Clock clock;
 	Clock change_clock;
@@ -163,7 +146,7 @@ int main()
 		if (Secret.size == 1) ChangeSize(Rect, i_size, time);
 		if (Secret.move == 1) Move(Rect, speed_move);
 
-		Draw(window, Rect);	
+		Draw(window, Rect);
 	}
 	return 0;
 }

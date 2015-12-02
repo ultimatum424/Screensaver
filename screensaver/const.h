@@ -1,5 +1,7 @@
-const int window_x = 500;
-const int window_y = window_x;
-int squre_sieze = 30;
-const float SPEED = 0.2;
 #pragma once
+const int WINDOW_X = 500;
+const int WINDOW_Y = WINDOW_X;
+const int SQURE_SIEZE = 30;
+const float SPEED = 0.2;
+const int QUANTITY = 5;
+
